@@ -7,7 +7,6 @@ Rails.application.configure do
   config.cache_classes = false
   
   config.hosts << "b07bf776113346c98fe354ce9caada06.vfs.cloud9.us-east-2.amazonaws.com"
-  
   config.action_dispatch.default_headers['X-Frame-Options'] = 'allow-from https://us-east-2.console.aws.amazon.com'
 
   # Do not eager load code on boot.
