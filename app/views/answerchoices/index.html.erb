@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Answerchoices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Question</th>
+      <th>Tally</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @answerchoices.each do |answerchoice| %>
+      <tr>
+        <td><%= answerchoice.content %></td>
+        <td><%= answerchoice.question_id %></td>
+        <td><%= answerchoice.tally %></td>
+        <td><%= link_to 'Show', answerchoice %></td>
+        <td><%= link_to 'Edit', edit_answerchoice_path(answerchoice) %></td>
+        <td><%= link_to 'Destroy', answerchoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Answerchoice', new_answerchoice_path %>
