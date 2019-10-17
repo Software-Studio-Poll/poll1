@@ -6,8 +6,6 @@
   <thead>
     <tr>
       <th>Text</th>
-      <th>Answera</th>
-      <th>Answerb</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +14,6 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.text %></td>
-        <td><%= question.answerA %></td>
-        <td><%= question.answerB %></td>
         <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>

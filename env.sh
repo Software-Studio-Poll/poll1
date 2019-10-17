@@ -7,7 +7,6 @@ yarn install --check-files
 bundle install --without production
 rails db:migrate
 sudo ln -sf `which nano` /usr/bin
-echo "The site still should show an error until you modify config/environments/development.rb"
 echo "You should run"
 echo 'git config --global user.name "Your Name"'
 echo
