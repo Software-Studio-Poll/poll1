@@ -5,8 +5,13 @@
   <h3><%= @question.text %> (<%= @question.answerchoices.count %> choices)</h3>
     <ul class="answerchoices">
       <% @question.answerchoices.each do |answerchoice| %>
+      
       <li>
-        <span class="content"><%= answerchoice.content %></span>
+        <span class="content"><%= answerchoice.content %>
+          <%= form_for(answerchoice, url: {action: "increment", controller: "answerchoices"}) do |f| %> 
+          <%= f.submit "Vote", class: "btn btn-primary" %>
+        <% end %>
+        </span>
       </li>
       <% end %>
     </ul>

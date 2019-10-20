@@ -36,7 +36,11 @@ class AnswerchoicesController < ApplicationController
       end
     end
   end
-
+  helper_method :increment
+  def increment
+    #tally = tally + 1
+    @answerchoice.update_attribiute(:tally, @answerchoice.tally + 1)
+  end
   # PATCH/PUT /answerchoices/1
   # PATCH/PUT /answerchoices/1.json
   def update
