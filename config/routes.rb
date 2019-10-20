@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #patch '/answerchoices/:id/vote', to: 'answerchoices#vote'
   resources :answerchoices do
     member do
       patch 'vote'
