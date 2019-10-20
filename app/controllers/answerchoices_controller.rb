@@ -36,7 +36,12 @@ class AnswerchoicesController < ApplicationController
       end
     end
   end
-
+  helper_method :vote
+  def vote
+    #tally = tally + 1
+    @answerchoice = Answerchoice.find(params[:id])
+    @answerchoice.increment!(:tally)
+  end
   # PATCH/PUT /answerchoices/1
   # PATCH/PUT /answerchoices/1.json
   def update
