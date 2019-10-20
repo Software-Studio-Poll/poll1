@@ -41,6 +41,7 @@ class AnswerchoicesController < ApplicationController
     #tally = tally + 1
     @answerchoice = Answerchoice.find(params[:id])
     @answerchoice.increment!(:tally)
+    redirect_to answerchoice_url(@answerchoice)
   end
   # PATCH/PUT /answerchoices/1
   # PATCH/PUT /answerchoices/1.json
