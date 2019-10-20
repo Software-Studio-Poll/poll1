@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :answerchoices do
     member do
-      patch 'increment'
+      patch 'vote'
     end
   end
   resources :questions

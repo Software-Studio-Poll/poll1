@@ -36,10 +36,11 @@ class AnswerchoicesController < ApplicationController
       end
     end
   end
-  helper_method :increment
-  def increment
+  helper_method :vote
+  def vote
     #tally = tally + 1
-    @answerchoice.update_attribiute(:tally, @answerchoice.tally + 1)
+    @answerchoice = Answerchoice.find(params[:id])
+    @answerchoice.increment!(:tally)
   end
   # PATCH/PUT /answerchoices/1
   # PATCH/PUT /answerchoices/1.json

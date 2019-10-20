@@ -8,7 +8,7 @@
       
       <li>
         <span class="content"><%= answerchoice.content %>
-          <%= form_for(answerchoice, url: {action: "increment", controller: "answerchoices"}) do |f| %> 
+          <%= form_for(answerchoice, url: {action: "vote", controller: "answerchoices"}) do |f| %> 
           <%= f.submit "Vote", class: "btn btn-primary" %>
         <% end %>
         </span>
