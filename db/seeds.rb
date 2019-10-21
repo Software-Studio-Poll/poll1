@@ -6,10 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Create a main sample user.
-Question.create!(text:  "2+2",
-             answerA: "4",
-             answerB:              "fish")
+20.times do |n|
+    quote = Faker::Movies::HarryPotter.quote
+    @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}")
+    
+    4.times do |o|
+        chara = Faker::Movies::HarryPotter.character
+        Answerchoice.create!(content: chara, question_id: @q.id)
+    end
+    Answerchoice.create!(content: "None of the above.", question_id: @q.id)
+    
+end
              
-Question.create!(text:  "2+3",
-             answerA: "4",
-             answerB:              "7")
+             
