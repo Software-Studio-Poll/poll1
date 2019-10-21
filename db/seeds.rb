@@ -12,9 +12,9 @@
     
     4.times do |o|
         chara = Faker::Movies::HarryPotter.character
-        Answerchoice.create!(content: chara, question_id: @q.id)
+        Answerchoice.create!(content: chara, question_id: @q.id, tally: 0)
     end
-    Answerchoice.create!(content: "None of the above.", question_id: @q.id)
+    Answerchoice.create!(content: "None of the above.", question_id: @q.id, tally: 0)
     
 end
 
