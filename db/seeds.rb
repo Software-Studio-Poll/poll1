@@ -10,10 +10,11 @@
     quote = Faker::Movies::HarryPotter.quote
     @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}")
     
-    4.times do |n|
+    4.times do |o|
         chara = Faker::Movies::HarryPotter.character
         Answerchoice.create!(content: chara, question_id: @q.id)
     end
+    Answerchoice.create!(content: "None of the above.", question_id: @q.id)
     
 end
 
