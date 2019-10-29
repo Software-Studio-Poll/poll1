@@ -8,7 +8,7 @@
 # Create a main sample user.
 20.times do |n|
     quote = Faker::Movies::HarryPotter.quote
-    @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}")
+    @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}\"")
     
     4.times do |o|
         chara = Faker::Movies::HarryPotter.character
