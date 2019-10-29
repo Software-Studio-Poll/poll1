@@ -9,7 +9,7 @@
       <li>
         <span class="content"><%= answerchoice.content %>
         <%= form_for(answerchoice, url: {action: "vote", id: answerchoice.id, controller: "answerchoices"}) do |f| %> 
-          <%= f.submit "Vote", class: "btn btn-primary" %>
+          <%= f.submit "✔", class: "btn btn-primary" %>
         <% end %>
         Current vote count: <%= answerchoice.tally %>
         </span>
