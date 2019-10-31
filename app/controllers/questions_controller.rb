@@ -24,7 +24,20 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
+    puts "START CTRL"
+    puts question_params
+    #puts question_params(:content)
+    puts question_params[:content]
+    answer_content = question_params[:content]
+    puts answer_content
+    question_text = question_params[:text]
+    question_params = Hash.new
+    question_params["text"] = question_text
+    #question_params = question_params.except!(:content)
+    puts question_params
     @question = Question.new(question_params)
+    puts @question.text
+    puts "END CTRL"
 
     respond_to do |format|
       if @question.save
@@ -35,6 +48,10 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+    
+    @answerchoice = Answerchoice.new({ content: answer_content, question_id: @question.id, tally: 0 })
+    @answerchoice.save!
+    
   end
 
   # PATCH/PUT /questions/1
@@ -70,6 +87,6 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       #params.require(:question).permit(:text, :answerA, :answerB)
-      params.require(:question).permit(:text)
+      params.require(:question).permit(:text, :content)
     end
 end
