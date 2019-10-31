@@ -51,6 +51,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    puts "START UPDATE"
+    answers = [question_params[:A], question_params[:B], question_params[:C], question_params[:D]]
+    question_text = question_params[:text]
+    question_params = {text: question_text}
+    
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -60,6 +65,7 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+    puts "END UPDATE"
   end
 
   # DELETE /questions/1
