@@ -1,4 +1,4 @@
-<%= form_with(model: question, local: true) do |form| %>
+<%= form_with(model: question, local: true, id:"qs") do |form| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -15,25 +15,14 @@
     <%= form.label :Question %>
     <%= form.text_field :text %>
   </div>
-  
-  <div class="field">
-    <%= form.label :A %>
-    <%= form.text_field :A %>
+  <div id="cs">
+    <div id="choice" class="field">
+      <%= form.label "Answer Choice" %>
+      <%= text_field_tag 'ans[]' %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.label :B %>
-    <%= form.text_field :B %>
-  </div>
-  <div class="field">
-    <%= form.label :C %>
-    <%= form.text_field :C %>
-  </div>
-  <div class="field">
-    <%= form.label :D %>
-    <%= form.text_field :D %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
+  
 <% end %>

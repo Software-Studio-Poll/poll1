@@ -25,11 +25,6 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     puts "START CTRL"
-    answers = [question_params[:A], question_params[:B], question_params[:C], question_params[:D]]
-    question_text = question_params[:text]
-    question_params = {text: question_text}
-    puts question_params
-    puts answers
     @question = Question.new(question_params)
     puts "END CTRL"
 
@@ -42,10 +37,12 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
-    answers.each { |a|  
+    
+    params[:ans].each { |a|  
       @answerchoice = Answerchoice.new({ content: a, question_id: @question.id, tally: 0 })
       @answerchoice.save!
     }
+    
   end
 
   # PATCH/PUT /questions/1
@@ -87,6 +84,6 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       #params.require(:question).permit(:text, :answerA, :answerB)
-      params.require(:question).permit(:text, :A, :B, :C, :D)
+      params.require(:question).permit(:text, :ans)
     end
 end
