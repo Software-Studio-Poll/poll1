@@ -16,11 +16,12 @@ function add() {
     var foo = document.getElementById("cs");
     var choice = document.getElementById("choice");
     cl = choice.cloneNode(true);
+    cl.setAttribute("value", "");
     //Append the element in page (in span).
     //foo.appendChild(label);
     foo.appendChild(cl);
 }
-           </script>
+</script>
 
 <%= render 'form', question: @question %>
 <div>

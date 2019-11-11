@@ -27,9 +27,27 @@ class QuestionsController < ApplicationController
     puts "START CTRL"
     @question = Question.new(question_params)
     puts "END CTRL"
-
+    
+    qsaved = @question.save
+    if not qsaved
+      format.html { render :new }
+      format.json { render json: @question.errors, status: :unprocessable_entity }
+      return
+    end
+      
+    asaved = false
+    
+    params[:ans].each { |a|  
+      @answerchoice = Answerchoice.new({ content: a, question_id: @question.id, tally: 0 })
+      asaved = @answerchoice.save
+      if asaved
+        puts "answer successfully saved"
+      else
+        break
+      end
+    }
     respond_to do |format|
-      if @question.save
+      if qsaved and asaved
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -38,10 +56,6 @@ class QuestionsController < ApplicationController
       end
     end
     
-    params[:ans].each { |a|  
-      @answerchoice = Answerchoice.new({ content: a, question_id: @question.id, tally: 0 })
-      @answerchoice.save!
-    }
     
   end
 
