@@ -1,4 +1,4 @@
 class Question < ApplicationRecord
-    validates :text, presence: true, length: { maximum: 5000 }
     has_many :answerchoices
+    validates :text, presence: true, length: { in: 2..1200 }
 end
