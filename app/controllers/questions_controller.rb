@@ -23,31 +23,40 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   # POST /questions.json
+  
   def create
-    puts "START CTRL"
     @question = Question.new(question_params)
-    puts "END CTRL"
-    
-    qsaved = @question.save
-    if not qsaved
-      format.html { render :new }
-      format.json { render json: @question.errors, status: :unprocessable_entity }
+    saved = @question.save
+
+    if not saved
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
       return
     end
-      
-    asaved = false
+    puts "printing params"
+    puts params[:ans]
     
     params[:ans].each { |a|  
       @answerchoice = Answerchoice.new({ content: a, question_id: @question.id, tally: 0 })
       asaved = @answerchoice.save
-      if asaved
-        puts "answer successfully saved"
-      else
-        break
+      puts "printing asaved"
+      puts asaved
+      puts @answerchoice.errors.messages
+      if not asaved
+        @question.destroy
+        respond_to do |format|
+          format.html { render :new }
+          #format.json { render json: @answerchoice.errors, status: :unprocessable_entity }
+          format.html { render plain: @answerchoice.errors.messages }
+        end
+        return
       end
     }
+    
     respond_to do |format|
-      if qsaved and asaved
+      if saved
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -55,7 +64,6 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
-    
     
   end
 
@@ -69,8 +77,8 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        #format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
         format.json { render json: @question.errors, status: :unprocessable_entity }
