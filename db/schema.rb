@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_234440) do
+ActiveRecord::Schema.define(version: 2019_11_12_004807) do
 
   create_table "answerchoices", force: :cascade do |t|
     t.text "content"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_234440) do
     t.integer "permission"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
 end
