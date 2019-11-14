@@ -12,13 +12,16 @@
 
   <div class="field">
     <%= form.label :Question %>
-    <%= form.text_field :text %>
+    <%= form.text_field :text, id: :q%>
   </div>
   <div id="cs">
-    <div id="choice" class="field">
+    <div id="choice0" class="field">
       <%= form.label "Answer Choice" %>
       <%= text_field_tag 'ans[]' %>
     </div>
+  </div>
+  <div>
+    <button id="newbut" type="button" value="Add" onClick:"javascript:add();">add another choice</button>
   </div>
   <div class="actions">
     <%= form.submit %>
