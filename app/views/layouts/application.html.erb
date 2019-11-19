@@ -9,12 +9,25 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('test.png') %>
-
-  </head>
-  <header>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Font_Awesome_5_solid_poll.svg" width="50" height="50"/>
-      <h0>PollMe</h0>
+    
+    
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Font_Awesome_5_solid_poll.svg" width="50" height="50"/>
+        <%= link_to "PollMe", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", root_path %></li>
+            <% if logged_in? %>
+              <li><%= link_to "Log out", logout_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
     </header>
+  </head>
 
   <body>
     <%= yield %>
