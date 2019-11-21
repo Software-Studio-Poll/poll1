@@ -7,18 +7,13 @@
 <script>
 
     function add() {
-        // 'foobar' is the div id, where new fields are to be added
-        var foo = document.getElementById("cs");
+        var question_form = document.getElementById("cs");
         var choice = document.getElementById("choice0");
         choice.removeAttribute("hidden")
         cl = choice.cloneNode(true);
         choice.setAttribute('hidden', '');
-        console.log(cl.childNodes[3])
-        console.log(cl.childNodes[3].value)
-        //cl.childNodes[3].setAttribute("id", cl.childNodes[3].id.slice(0, 2) + toString(parseInt(cl.childNodes[3].id[-1]) + 1))
-        console.log(cl.childNodes[3].value)
         //Append the element in page (in span).
-        foo.appendChild(cl);
+        question_form.appendChild(cl);
     }
     
     function validate() {
