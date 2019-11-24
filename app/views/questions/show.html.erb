@@ -5,15 +5,7 @@
   <h3><%= @question.text %> (<%= @question.answerchoices.count %> choices)</h3>
     <ul class="answerchoices">
       <% @question.answerchoices.each do |answerchoice| %>
-      
-      <li>
-        <span class="content"><%= answerchoice.content %>
-        <%= form_for(answerchoice, url: {action: "vote", id: answerchoice.id, controller: "answerchoices"}) do |f| %> 
-          <%= f.submit "✔", class: "btn btn-primary" %>
-        <% end %>
-        Current vote count: <%= answerchoice.tally %>
-        </span>
-      </li>
+        <%= render partial: "answerchoices/answerchoice", object: answerchoice %>
       <% end %>
     </ul>
   <% end %>
