@@ -10,5 +10,17 @@
   <%= @poll.user_id %>
 </p>
 
+<div class="col-md-8">
+  <% if @poll.questions.any? %>
+  <h3><%= @poll.title %></h3>
+    <p>
+      <% @poll.questions.each do |question| %>
+        <%= render partial: "questions/question", object: question %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
+
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
