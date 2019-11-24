@@ -1,8 +1,8 @@
 <div class="col-md-8">
-  <% if @question.answerchoices.any? %>
-  <h3><%= @question.text %> (<%= @question.answerchoices.count %> choices)</h3>
+  <% if question.answerchoices.any? %>
+  <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
     <ul class="answerchoices">
-      <% @question.answerchoices.each do |answerchoice| %>
+      <% question.answerchoices.each do |answerchoice| %>
         <%= render partial: "answerchoices/answerchoice", object: answerchoice %>
       <% end %>
     </ul>
