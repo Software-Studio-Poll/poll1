@@ -15,6 +15,7 @@ class PollsController < ApplicationController
   # GET /polls/new
   def new
     @poll = Poll.new
+    @poll.questions.build.answerchoices.build
   end
 
   # GET /polls/1/edit
@@ -24,7 +25,10 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
+    puts "polls_create START"
     @poll = Poll.new(poll_params)
+    puts @poll.inspect
+    puts @poll.questions.inspect
 
     respond_to do |format|
       if @poll.save
@@ -35,6 +39,7 @@ class PollsController < ApplicationController
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
+    puts "polls_create END"
   end
 
   # PATCH/PUT /polls/1
@@ -69,6 +74,6 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:title, :user_id)
+      params.require(:poll).permit(:title, :user_id, :questions_attributes => [:text, :answerchoices_attributes => [:content]])
     end
 end

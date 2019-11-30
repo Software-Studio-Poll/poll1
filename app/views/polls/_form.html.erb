@@ -20,6 +20,18 @@
     <%= form.label :user_id %>
     <%= form.number_field :user_id %>
   </div>
+  
+  <%= form.fields_for :questions do |s| %>
+    <%= s.label :text %>
+    <%= s.text_field :text %>
+    
+    
+    <%= s.fields_for :answerchoices do |e| %>
+      <%= e.label :content %>
+      <%= e.text_field :content %>
+    <% end %>
+    
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
