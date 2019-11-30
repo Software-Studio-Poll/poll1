@@ -1,5 +1,5 @@
 class Answerchoice < ApplicationRecord
-    belongs_to :question
+    belongs_to :question, optional: true
     validates :content, length: { in: 1..1200 }
-    validates :content, :question_id, :tally, presence: true
+    validates :content, :question, presence: true
 end

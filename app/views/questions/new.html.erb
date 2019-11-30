@@ -1,32 +1,4 @@
 <h1>New Question</h1>
 
-<div id="choice0" class="field" hidden>
-      <label for="question_Answer Choice">Answer choice</label>
-      <input type="text" name="ans[]" id="ans_" required="">
-</div>
-<script>
-
-    function add() {
-        var question_form = document.getElementById("cs");
-        var choice = document.getElementById("choice0");
-        choice.removeAttribute("hidden")
-        cl = choice.cloneNode(true);
-        choice.setAttribute('hidden', '');
-        //Append the element in page (in span).
-        question_form.appendChild(cl);
-    }
-    
-    function validate() {
-        
-    }
-</script>
-
 <%= render 'form', question: @question %>
 <%= link_to 'Back', questions_path %>
-<script>
-    document.getElementById("newbut").onclick = add;
-    const ans = document.getElementById('ans_');
-    ans.setAttribute('required', '');
-    const q = document.getElementById('q');
-    q.setAttribute('required', '');
-</script>

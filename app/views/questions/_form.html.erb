@@ -18,15 +18,12 @@
     <%= form.label :poll_id_temp %>
     <%= form.text_field :poll_id, id: :p%>
   </div>
-  <div id="cs">
-    <div id="choice0" class="field">
-      <%= form.label "Answer Choice" %>
-      <%= text_field_tag 'ans[]' %>
-    </div>
-  </div>
-  <div>
-    <button id="newbut" type="button" value="Add" onClick:"javascript:add();">add another choice</button>
-  </div>
+  
+  <%= form.fields_for :answerchoices do |s| %>
+    <%= s.label :content %>
+    <%= s.text_field :content %>
+  <% end %>
+  
   <div class="actions">
     <%= form.submit %>
   </div>

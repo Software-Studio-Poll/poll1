@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    @question.answerchoices.build
   end
 
   # GET /questions/1/edit
@@ -25,38 +26,10 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   
   def create
-    @question = Question.new(question_params)
-    saved = @question.save
+   @question = Question.new(question_params)
 
-    if not saved
-      respond_to do |format|
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
-      return
-    end
-    puts "printing params"
-    puts params[:ans]
-    
-    params[:ans].each { |a|  
-      @answerchoice = Answerchoice.new({ content: a, question_id: @question.id, tally: 0 })
-      asaved = @answerchoice.save
-      puts "printing asaved"
-      puts asaved
-      puts @answerchoice.errors.messages
-      if not asaved
-        @question.destroy
-        respond_to do |format|
-          format.html { render :new }
-          #format.json { render json: @answerchoice.errors, status: :unprocessable_entity }
-          format.html { render plain: @answerchoice.errors.messages }
-        end
-        return
-      end
-    }
-    
     respond_to do |format|
-      if saved
+      if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -64,7 +37,6 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # PATCH/PUT /questions/1
@@ -105,6 +77,7 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:text, :ans, :poll_id)
+      params.require(:question).permit(:text, :poll_id, 
+        :answerchoices_attributes => [:content])
     end
 end
