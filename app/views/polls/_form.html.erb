@@ -72,9 +72,24 @@
     c = div.clone();
     fixatts(c, count);
     
+    console.log(c.children("input"));
+    c.children("input").val("");
+    
+    $(this).parent().append(c);
+    $(this).parent().append($(this));
+  });
+  
+  $(".add_question").click(function(){
+    div = $(this).prev(".a");
+    let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
+    console.log(count);
+    c = div.clone();
+    fixatts(c, count);
+    
     //console.log(input.attr())
     
     $(this).parent().append(c);
     $(this).parent().append($(this));
   }); 
+  
 </script>
