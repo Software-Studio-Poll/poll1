@@ -20,20 +20,61 @@
     <%= form.label :user_id %>
     <%= form.number_field :user_id %>
   </div>
-  
-  <%= form.fields_for :questions do |s| %>
-    <%= s.label :text %>
-    <%= s.text_field :text %>
-    
-    
-    <%= s.fields_for :answerchoices do |e| %>
-      <%= e.label :content %>
-      <%= e.text_field :content %>
+  <div class="q" id="q0">
+    <%= form.fields_for :questions do |questions_form| %>
+      <%= questions_form.label :text %>
+      <%= questions_form.text_field :text %>
+      <div class="a" id="q0a0">
+        <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
+          <%= answerchoices_form.label :content %>
+          <%= answerchoices_form.text_field :content %>
+        <% end %>
+      </div>
+      <button class="add_choice" type="button">Add New Choice</button>
     <% end %>
-    
-  <% end %>
-
+  </div>
+  <button class="add_question" type="button">Add New Question</button>
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+<script>
+  function fixatts(elem, cntr) {
+    let regexp = /([0-9](?=_content|]\[c))|([0-9]$)/g;
+    $(elem).find("[id]").add(elem).each(function() {
+        //console.log(this.id);
+        this.id = this.id.replace(regexp, cntr);
+        //console.log(this.id);
+    })
+    $(elem).find("[name]").add(elem).each(function() {
+      if ($(this)[0].hasAttribute("name")) {
+        $(this).attr("name");
+        var name = $(this).attr("name");
+        name = name.replace(regexp, cntr);
+        $(this).attr("name", name);
+      }
+    })
+    $(elem).find("[for]").add(elem).each(function() {
+      var attr = "for"
+      if ($(this)[0].hasAttribute(attr)) {
+        $(this).attr(attr);
+        var name = $(this).attr(attr);
+        name = name.replace(regexp, cntr);
+        $(this).attr(attr, name);
+      }
+    })
+  }
+
+  $(".add_choice").click(function(){
+    div = $(this).prev(".a");
+    let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
+    console.log(count);
+    c = div.clone();
+    fixatts(c, count);
+    
+    //console.log(input.attr())
+    
+    $(this).parent().append(c);
+    $(this).parent().append($(this));
+  }); 
+</script>
