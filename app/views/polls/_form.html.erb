@@ -117,6 +117,7 @@
     $(this).parent().append(c);
     //move the button to the bottom of the div
     $(this).parent().append($(this));
+    $(this).parent().append($(this).siblings(".rem_question"));
   });
   
   $(".add_question").click(function(){
@@ -125,17 +126,15 @@
     console.log(count);
     c = $(".q").first().clone();
     c[0].removeAttribute("hidden");
-    //need to change the attributes now, hardest part
     qfixatts(c, count);
-    
     allqs = $("#questions").append(c);
     $("#questions").append($(this));
   });
   
   $(document).on("click", ".rem_choice", function(){
     div = $(this).parent();
-    if (parseInt(div.attr("id").charAt(div.attr("id").length-1)) == 0) {
-      console.log("can't remove first choice");
+    if ($(this).parent().parent().children(".a").length == 1) {
+      console.log("can't remove only choice");
     }
     else {
       div.remove();
@@ -144,8 +143,8 @@
   
   $(document).on("click", ".rem_question", function(){
     div = $(this).parent();
-    if (parseInt(div.attr("id").charAt(div.attr("id").length-1)) == 0) {
-      console.log("can't remove first question");
+    if ($(this).parent().parent().children(".q").length == 1) {
+      console.log("can't remove only question");
     }
     else {
       div.remove();
