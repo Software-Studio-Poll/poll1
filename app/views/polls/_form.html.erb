@@ -115,8 +115,9 @@
     c.children("input").val("");
     //append the new choice to the question_div
     $(this).parent().append(c);
-    //move the button to the bottom of the div
+    //move the add_choice button to the bottom of the div
     $(this).parent().append($(this));
+    //move the remove_question button below the add_choice button
     $(this).parent().append($(this).siblings(".rem_question"));
   });
   
@@ -134,7 +135,7 @@
   $(document).on("click", ".rem_choice", function(){
     div = $(this).parent();
     if ($(this).parent().parent().children(".a").length == 1) {
-      console.log("can't remove only choice");
+      alert("You can't remove only choice!");
     }
     else {
       div.remove();
@@ -144,7 +145,7 @@
   $(document).on("click", ".rem_question", function(){
     div = $(this).parent();
     if ($(this).parent().parent().children(".q").length == 1) {
-      console.log("can't remove only question");
+      alert("You can't remove only question!");
     }
     else {
       div.remove();
