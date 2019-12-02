@@ -45,7 +45,7 @@
 <script>
   $( document ).ready(function() {
     console.log( "ready!" );
-    hide = $(".q").clone()
+    hide = $(".q").first().clone()
     hide[0].setAttribute("hidden", "");
     $(document.body).prepend(hide);
   });
@@ -79,9 +79,7 @@
   function qfixatts(elem, cntr) {
     let regexp = /[0-9]/;
     $(elem).find("[id]").add(elem).each(function() {
-        //console.log(this.id);
         this.id = this.id.replace(regexp, cntr);
-        //console.log(this.id);
     })
     $(elem).find("[name]").add(elem).each(function() {
       if ($(this)[0].hasAttribute("name")) {
