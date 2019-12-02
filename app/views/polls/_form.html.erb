@@ -30,9 +30,11 @@
             <%= answerchoices_form.label :Answer_Choice %>
             <%= answerchoices_form.text_field :content %>
           <% end %>
+          <button class="rem_choice" type="button">Remove Choice</button>
         </div>
         <button class="add_choice" type="button">Add New Choice</button>
       <% end %>
+      <button class="rem_question" type="button">Remove Question</button>
     </div>
     <button class="add_question" type="button">Add New Question</button>
   </div>
@@ -101,16 +103,19 @@
   }
 
   $(document).on("click", ".add_choice", function(){
-    div = $(this).prev(".a");
+    //getting the div that contains the correct last choice of the appropriate question
+    div = $(this).parent().children(".a").last();
+    //finding the id that the new choice should be
     let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
-    console.log(count);
+    //cloning the selected choice
     c = div.clone();
+    //changing the id of the clone to the correct id of the new choice
     fixatts(c, count);
-    
-    console.log(c.children("input"));
+    //emptying the value of the new choice
     c.children("input").val("");
-    
+    //append the new choice to the question_div
     $(this).parent().append(c);
+    //move the button to the bottom of the div
     $(this).parent().append($(this));
   });
   
@@ -125,6 +130,26 @@
     
     allqs = $("#questions").append(c);
     $("#questions").append($(this));
-  }); 
+  });
+  
+  $(document).on("click", ".rem_choice", function(){
+    div = $(this).parent();
+    if (parseInt(div.attr("id").charAt(div.attr("id").length-1)) == 0) {
+      console.log("can't remove first choice");
+    }
+    else {
+      div.remove();
+    }
+  });
+  
+  $(document).on("click", ".rem_question", function(){
+    div = $(this).parent();
+    if (parseInt(div.attr("id").charAt(div.attr("id").length-1)) == 0) {
+      console.log("can't remove first question");
+    }
+    else {
+      div.remove();
+    }
+  });
   
 </script>
