@@ -13,22 +13,22 @@
 
   <div class="field">
     <%= form.label :Poll_Title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
+    <%= form.number_field :user_id, required: true %>
   </div>
   <div id="questions">
     <%= form.fields_for :questions do |questions_form| %>
       <div class="q" id="q0">
         <%= questions_form.label :Question %>
-        <%= questions_form.text_field :text %>
+        <%= questions_form.text_field :text, required: true %>
         <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
           <div class="a" id="q0a0">
             <%= answerchoices_form.label :Answer_Choice %>
-            <%= answerchoices_form.text_field :content %>
+            <%= answerchoices_form.text_field :content, required: true %>
             <%= answerchoices_form.label :_destroy, "Remove Choice" %>
             <%= answerchoices_form.hidden_field :_destroy, :value => '0' %>
             <button class="rem_choice" type="button">Remove Choice</button>
@@ -45,6 +45,10 @@
   </div>
 <% end %>
 <script>
+  function RemoveHiddenRequired() {
+    $("[required]:hidden").remove();
+  }
+
   $( document ).ready(function() {
     console.log( "ready!" );
     hide = $(".q").first().clone()
@@ -145,6 +149,9 @@
       div.children("input:hidden").attr("value", "1");
       div.attr("hidden","");
     }
+    
+    RemoveHiddenRequired();
+    
   });
   
   $(document).on("click", ".rem_question", function(){
@@ -155,6 +162,9 @@
     else {
       div.attr("hidden","");
     }
+    
+    RemoveHiddenRequired();
+    
   });
   
 </script>
