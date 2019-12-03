@@ -129,6 +129,7 @@
   $(".add_question").click(function(){
     console.log("adding question")
     div = $(this).prev(".q");
+    console.log($(this));
     console.log(div);
     console.log(div.attr("id").substring(3, div.attr("id").length));
     let count = parseInt(div.attr("id").substring(1, div.attr("id").length)) + 1;
@@ -156,6 +157,8 @@
   
   $(document).on("click", ".rem_question", function(){
     div = $(this).parent();
+    console.log($(this));
+    console.log(div);
     if ($(this).parent().parent().children(".q").length == 1) {
       alert("You can't remove only question!");
     }
