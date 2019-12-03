@@ -53,7 +53,7 @@
   });
   
   function fixatts(elem, cntr) {
-    let regexp = /([0-9](?=_content|]\[c))|([0-9]$)/g;
+    let regexp = /([0-9](?=_content|]\[c))|([0-9]+$)/g;
     $(elem).find("[id]").add(elem).each(function() {
         //console.log(this.id);
         this.id = this.id.replace(regexp, cntr);
@@ -79,7 +79,7 @@
   }
   
   function qfixatts(elem, cntr) {
-    let regexp = /[0-9]/;
+    let regexp = /[0-9]+/;
     $(elem).find("[id]").add(elem).each(function() {
         this.id = this.id.replace(regexp, cntr);
     })
@@ -106,9 +106,8 @@
     console.log("adding choice");
     //getting the div that contains the correct last choice of the appropriate question
     div = $(this).parent().children(".a").last();
-    console.log(div);
     //finding the id that the new choice should be
-    let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
+    let count = parseInt(div.attr("id").substring(3, div.attr("id").length)) + 1;
     //cloning the selected choice
     c = div.clone();
     //changing the id of the clone to the correct id of the new choice
@@ -124,8 +123,11 @@
   });
   
   $(".add_question").click(function(){
+    console.log("adding question")
     div = $(this).prev(".q");
-    let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
+    console.log(div);
+    console.log(div.attr("id").substring(3, div.attr("id").length));
+    let count = parseInt(div.attr("id").substring(1, div.attr("id").length)) + 1;
     console.log(count);
     c = $(".q").first().clone();
     c[0].removeAttribute("hidden");
@@ -147,9 +149,6 @@
   
   $(document).on("click", ".rem_question", function(){
     div = $(this).parent();
-    console.log(div);
-    console.log($(this).parent().parent());
-    console.log($(this).parent().parent().children());
     if ($(this).parent().parent().children(".q").length == 1) {
       alert("You can't remove only question!");
     }
