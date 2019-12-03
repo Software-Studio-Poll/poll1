@@ -8,8 +8,8 @@
 # Create a main sample user.
 
 
-i = 0
-10.times do |m|
+
+100.times do |m|
     
     fake_name = Faker::Name.name
     fake_email = Faker::Internet.email
@@ -26,7 +26,7 @@ i = 0
             Answerchoice.create!(content: chara, question_id: @q.id, tally: 0)
         end
         Answerchoice.create!(content: "None of the above.", question_id: @q.id, tally: 0)
-        i = i + 1
+        
     end
 end
 
