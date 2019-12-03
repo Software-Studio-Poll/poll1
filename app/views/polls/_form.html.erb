@@ -21,21 +21,23 @@
     <%= form.number_field :user_id %>
   </div>
   <div id="questions">
-    <div class="q" id="q0">
-      <%= form.fields_for :questions do |questions_form| %>
+    <%= form.fields_for :questions do |questions_form| %>
+      <div class="q" id="q0">
         <%= questions_form.label :Question %>
         <%= questions_form.text_field :text %>
-        <div class="a" id="q0a0">
-          <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
+        <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
+          <div class="a" id="q0a0">
             <%= answerchoices_form.label :Answer_Choice %>
             <%= answerchoices_form.text_field :content %>
-          <% end %>
-          <button class="rem_choice" type="button">Remove Choice</button>
-        </div>
+            <%= answerchoices_form.label :_destroy, "Remove Choice" %>
+            <%= answerchoices_form.hidden_field :_destroy, :value => '0' %>
+            <button class="rem_choice" type="button">Remove Choice</button>
+          </div>
+        <% end %>
         <button class="add_choice" type="button">Add New Choice</button>
-      <% end %>
-      <button class="rem_question" type="button">Remove Question</button>
-    </div>
+        <button class="rem_question" type="button">Remove Question</button>
+      </div>
+    <% end %>
     <button class="add_question" type="button">Add New Question</button>
   </div>
   <div class="actions">
@@ -101,8 +103,10 @@
   }
 
   $(document).on("click", ".add_choice", function(){
+    console.log("adding choice");
     //getting the div that contains the correct last choice of the appropriate question
     div = $(this).parent().children(".a").last();
+    console.log(div);
     //finding the id that the new choice should be
     let count = parseInt(div.attr("id").charAt(div.attr("id").length-1)) + 1;
     //cloning the selected choice
@@ -136,17 +140,21 @@
       alert("You can't remove only choice!");
     }
     else {
-      div.remove();
+      div.children("input:hidden").attr("value", "1");
+      div.attr("hidden","");
     }
   });
   
   $(document).on("click", ".rem_question", function(){
     div = $(this).parent();
+    console.log(div);
+    console.log($(this).parent().parent());
+    console.log($(this).parent().parent().children());
     if ($(this).parent().parent().children(".q").length == 1) {
       alert("You can't remove only question!");
     }
     else {
-      div.remove();
+      div.attr("hidden","");
     }
   });
   
