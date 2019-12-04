@@ -13,7 +13,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">User ID</th>
+      <th scope="col">User Name</th>
       <th scope="col">Poll Name</th>
       <th colspan="3"></th>
     </tr>
@@ -22,11 +22,11 @@
   <tbody>
     <% @polls.each do |poll| %>
       <tr>
-        <td><%= poll.user_id %></td>
+        <td><%= User.find(poll.user_id).name %></td>
         <td><%= link_to poll.title, poll %></td>
 
-        <td><%= link_to 'Edit', edit_poll_path(poll) %></td> 
-        <td><%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Update Poll', edit_poll_path(poll) %></td> 
+        <td><%= link_to 'Delete Poll', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         
       </tr>
     <% end %>
