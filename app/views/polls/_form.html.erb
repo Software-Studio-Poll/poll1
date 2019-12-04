@@ -1,3 +1,55 @@
+<style>
+
+div.a {
+  margin-left: 20px;
+}
+
+.rem_choice{
+  background-color: #ffcccb;
+  margin-top: 10px;
+  margin-bottom: 10px; 
+  border-radius: 10px;
+}
+
+.add_choice{
+  background-color: #96ea96;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.rem_question{ 
+  color: #ffffff;
+  background-color: #ff0000;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  
+}
+
+button.add_question{
+  color: #ffffff;
+  background-color: #0abf0a;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+
+div.actions {
+  margin-left: 10px;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+
+</style>
+
+
 <%= form_with(model: poll, local: true) do |form| %>
   <% if poll.errors.any? %>
     <div id="error_explanation">
@@ -12,38 +64,45 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :Poll_Title %>
-    <%= form.text_field :title, required: true %>
+    <%= form.label :Poll_Title, "Poll Title" %>
+    <%= form.text_field :title, class: 'form-control', required: true %>
   </div>
 
   <div class="field">
-    <%= form.label "User ID" %>
-    <%= form.number_field :user_id, required: true %>
+    <%= form.label :id, "User ID" %>
+    <%= form.number_field :user_id, class: 'form-control', required: true %>
   </div>
+  
+  <br>
+  <hr></hr>
+  <br>
+  
   <div id="questions">
     <%= form.fields_for :questions do |questions_form| %>
       <div class="q" id="q0">
         <%= questions_form.label :Question %>
-        <%= questions_form.text_field :text, required: true %>
+        <%= questions_form.text_field :text, class: 'form-control', required: true %>
+        </br>
         <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
-          <div class="a" id="q0a0">
+          <div1 class="a" id="q0a0", margin = 10px>
             <%= answerchoices_form.label :Answer_Choice %>
-            <%= answerchoices_form.text_field :content, required: true %>
-            <%= answerchoices_form.label :_destroy, "Remove Choice" %>
+            <%= answerchoices_form.text_field :content, class: 'form-control', required: true %>
             <%= answerchoices_form.hidden_field :_destroy, :value => '0' %>
             <button class="rem_choice" type="button">Remove Choice</button>
-          </div>
+          </div1>
         <% end %>
         <button class="add_choice" type="button">Add New Choice</button>
+        <br>
         <button class="rem_question" type="button">Remove Question</button>
       </div>
     <% end %>
     <button class="add_question" type="button">Add New Question</button>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary', value: 'Create Poll' %>
   </div>
 <% end %>
+
 <script>
   function RemoveHiddenRequired() {
     $("[required]:hidden").remove();

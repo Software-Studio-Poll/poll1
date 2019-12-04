@@ -4,7 +4,7 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    @polls = Poll.all
+    @polls = Poll.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /polls/1
