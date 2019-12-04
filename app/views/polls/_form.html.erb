@@ -82,7 +82,6 @@ hr {
       <div class="q" id="q0">
         <%= questions_form.label :Question %>
         <%= questions_form.text_field :text, class: 'form-control', required: true %>
-        </br>
         <%= questions_form.fields_for :answerchoices do |answerchoices_form| %>
           <div1 class="a" id="q0a0", margin = 10px>
             <%= answerchoices_form.label :Answer_Choice %>
@@ -92,7 +91,6 @@ hr {
           </div1>
         <% end %>
         <button class="add_choice" type="button">Add New Choice</button>
-        <br>
         <button class="rem_question" type="button">Remove Question</button>
       </div>
     <% end %>
@@ -105,7 +103,9 @@ hr {
 
 <script>
   function RemoveHiddenRequired() {
-    $("[required]:hidden").remove();
+    console.log($("#questions").find("[required]:hidden"));
+    console.log($("[required]:hidden"));
+    $("#questions").find("[required]:hidden").remove();
   }
 
   $( document ).ready(function() {
@@ -168,7 +168,7 @@ hr {
   $(document).on("click", ".add_choice", function(){
     console.log("adding choice");
     //getting the div that contains the correct last choice of the appropriate question
-    div = $(this).parent().children(".a").last();
+    div = $(this).siblings(".a:visible").last();
     //finding the id that the new choice should be
     let count = parseInt(div.attr("id").substring(3, div.attr("id").length)) + 1;
     //cloning the selected choice
@@ -187,30 +187,35 @@ hr {
   
   $(".add_question").click(function(){
     console.log("adding question")
-    div = $(this).prev(".q");
-    console.log($(this));
-    console.log(div);
-    console.log(div.attr("id").substring(3, div.attr("id").length));
-    let count = parseInt(div.attr("id").substring(1, div.attr("id").length)) + 1;
-    console.log(count);
+    //prevq is div containing previous question
+    prevq = $(".q:visible").last();
+    //count is id of new question to make
+    let count = parseInt(prevq.attr("id").substring(1, prevq.attr("id").length)) + 1;
+    //c is set to a clone of the hidden question at the top
     c = $(".q").first().clone();
+    console.log(c);
+    //remove hidden attribute from the clone
     c[0].removeAttribute("hidden");
+    //set the id values of the clone correctly
     qfixatts(c, count);
-    allqs = $("#questions").append(c);
+    //append the corrected clone to the list of questions
+    $("#questions").append(c);
+    //move the add_questions button to the bottom
     $("#questions").append($(this));
   });
   
   $(document).on("click", ".rem_choice", function(){
     div = $(this).parent();
-    if ($(this).parent().parent().children(".a").length == 1) {
+    if ($(this).parent().siblings(".a:visible").length == 0) {
       alert("You can't remove only choice!");
     }
     else {
       div.children("input:hidden").attr("value", "1");
-      div.attr("hidden","");
+      //div.attr("hidden","");
+      div.remove();
     }
     
-    RemoveHiddenRequired();
+    //RemoveHiddenRequired();
     
   });
   
@@ -218,14 +223,14 @@ hr {
     div = $(this).parent();
     console.log($(this));
     console.log(div);
-    if ($(this).parent().parent().children(".q").length == 1) {
+    if ($(this).parent().siblings(".q:visible").length == 0) {
       alert("You can't remove only question!");
     }
     else {
-      div.attr("hidden","");
+      div.remove();
     }
     
-    RemoveHiddenRequired();
+    //RemoveHiddenRequired();
     
   });
   
