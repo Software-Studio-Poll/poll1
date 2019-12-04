@@ -8,8 +8,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @poll.user_id %>
+  <strong>Creator:</strong>
+  <%= User.find(@poll.user_id).name %>
 </p>
 
 <div class="col-md-8">
