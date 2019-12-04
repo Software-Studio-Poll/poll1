@@ -70,7 +70,7 @@ hr {
 
   <div class="field">
     <%= form.label :id, "User ID" %>
-    <%= form.number_field :user_id, class: 'form-control', required: true %>
+    <%= form.number_field :user_id, value: current_user.id, class: 'form-control', required: true %>
   </div>
   
   <br>
