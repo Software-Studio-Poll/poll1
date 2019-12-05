@@ -17,7 +17,23 @@
   <h3><%= @poll.title %></h3>
     <p>
       <% @poll.questions.each do |question| %>
-        <%= render partial: "questions/question", object: question %>
+        <div class="col-md-8">
+          <% if question.answerchoices.any? %>
+          <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
+            <ul class="answerchoices">
+              <% question.answerchoices.each do |answerchoice| %>
+                <li>
+                  <span class="content"><%= answerchoice.content %>
+                    <%= form_for(answerchoice, url: {action: "vote", id: answerchoice.id, controller: "answerchoices"}) do |f| %> 
+                      <%= f.submit "✔", class: "btn btn-primary" %>
+                    <% end %>
+                    Current vote count: <%= answerchoice.tally %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       <% end %>
     </p>
   <% end %>
