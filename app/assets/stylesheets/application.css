@@ -14,7 +14,7 @@
  *= require_self
  */
  
-header {
+.navbar {
     font-weight: bold;
     font-size: 50px;
     color: #fd5252;
