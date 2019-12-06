@@ -9,7 +9,7 @@
 
 
 
-100.times do |m|
+80.times do |m|
     
     fake_name = Faker::Name.name
     fake_email = Faker::Internet.email
