@@ -9,7 +9,7 @@
 
 
 
-80.times do |m|
+40.times do |m|
     
     fake_name = Faker::Name.name
     fake_email = Faker::Internet.email
@@ -17,7 +17,7 @@
     poll_title = fake_name + "'s Poll"
     @harry = User.create!(name: fake_name, email: fake_email, permission:0, password: fake_pw, password_confirmation: fake_pw)
     @harry_poll = Poll.create!(title: poll_title, user_id: @harry.id)
-    20.times do |n|
+    15.times do |n|
         quote = Faker::Movies::HarryPotter.quote
         @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}\"", poll_id: @harry_poll.id)
         
