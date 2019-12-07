@@ -2,5 +2,16 @@
 
 <%= render partial: "question", object: @question %>
 
+
+
+<div class="col-md-8">
+  <% if @question.answerchoices.any? %>
+     <%= pie_chart @question.answerchoices.group(:content).count %>
+     <pie-chart :data="{'Blueberry': 44, 'Strawberry': 23}"></pie-chart>
+  <% end %>
+</div>
+
+
+
 <%= link_to 'Edit Question text', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>
