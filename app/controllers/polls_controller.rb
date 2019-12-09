@@ -1,6 +1,6 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:create, :new, :edit, :update]
+  before_action :logged_in_user, only: [:show, :create, :new, :edit, :update]
   #before_action :logged_in_user
 
   # GET /polls
@@ -72,6 +72,15 @@ class PollsController < ApplicationController
     puts "pvote START"
     puts params
     puts "pvote END"
+  end
+  
+  def userchoices
+    @poll.questions.answerchoices.userchoices
+    #[@project1, @project2]
+  end
+
+  def userchoices_attributes=(attributes)
+    # Process the attributes hash
   end
 
   private
