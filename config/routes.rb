@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   get    '/signup',  to: 'users#new'
   resources :users
   #patch '/answerchoices/:id/vote', to: 'answerchoices#vote'
+  resources :polls do
+    member do
+      patch 'pvote'
+    end
+  end
   resources :answerchoices do
     member do
       patch 'vote'

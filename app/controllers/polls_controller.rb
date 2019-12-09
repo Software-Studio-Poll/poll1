@@ -67,6 +67,12 @@ class PollsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def pvote
+    puts "pvote START"
+    puts params
+    puts "pvote END"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

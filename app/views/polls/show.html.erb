@@ -13,29 +13,37 @@
 </p>
 
 <div class="col-md-8">
-  <% if @poll.questions.any? %>
-  <h3><%= @poll.title %></h3>
-    <p>
-      <% @poll.questions.each do |question| %>
-        <div class="col-md-8">
-          <% if question.answerchoices.any? %>
-          <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
-            <ul class="answerchoices">
-              <% question.answerchoices.each do |answerchoice| %>
-                <li>
-                  <span class="content"><%= answerchoice.content %>
-                    <%= form_for(answerchoice, url: {action: "vote", id: answerchoice.id, controller: "answerchoices"}) do |f| %> 
-                      <%= f.submit "✔", class: "btn btn-primary" %>
-                    <% end %>
-                    Current vote count: <%= answerchoice.tally %>
-                  </span>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
+  <%= form_with(model: @poll, url: {action: "pvote", id: @poll.id, controller: "polls"}, local: true) do |form| %>
+    <% if @poll.questions.any? %>
+    <h3><%= @poll.title %></h3>
+      <p>
+        <% @poll.questions.each do |question| %>
+          <div class="col-md-8">
+            <% if question.answerchoices.any? %>
+            <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
+              <ul class="answerchoices">
+                <% question.answerchoices.each do |answerchoice| %>
+                  <%= form.fields_for :userchoices do |userchoices_form| %>
+                    <li>
+                      <span class="content">
+                        <%= radio_button 'answerchoice', 'id', answerchoice.id %> <%= answerchoice.content %>
+                        <br>
+                        Current vote count: <%= answerchoice.tally %>
+                      </span>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+      </p>
+      <p>
+        <div class="actions">
+          <%= form.submit "✔", class: "btn btn-primary" %>
         </div>
-      <% end %>
-    </p>
+      </p>
+    <% end %>
   <% end %>
 </div>
 
