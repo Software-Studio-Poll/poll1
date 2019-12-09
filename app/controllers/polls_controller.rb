@@ -71,6 +71,14 @@ class PollsController < ApplicationController
   def pvote
     puts "pvote START"
     puts params
+    puts params[:poll][:user_id]
+    params[:choices].each do |key, value| 
+      puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
+      @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
+      if @userchoice.save
+        puts "successful!"
+      end
+    end
     puts "pvote END"
   end
   

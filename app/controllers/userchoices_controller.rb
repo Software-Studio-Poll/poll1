@@ -24,6 +24,7 @@ class UserchoicesController < ApplicationController
   # POST /userchoices
   # POST /userchoices.json
   def create
+    puts userchoice_params
     @userchoice = Userchoice.new(userchoice_params)
 
     respond_to do |format|
