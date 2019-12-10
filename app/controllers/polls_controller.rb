@@ -76,19 +76,12 @@ class PollsController < ApplicationController
       puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
       @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
       if @userchoice.save
-        puts "successful!"
+        redirect_to polls_path, notice: 'Thank you for voting!'
+        puts "success!"
+        #format.json { render :show, status: :ok, location: @poll }
       end
     end
     puts "pvote END"
-  end
-  
-  def userchoices
-    @poll.questions.answerchoices.userchoices
-    #[@project1, @project2]
-  end
-
-  def userchoices_attributes=(attributes)
-    # Process the attributes hash
   end
 
   private
