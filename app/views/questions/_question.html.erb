@@ -1,10 +1,23 @@
 <div class="col-md-8">
-  <% if question.answerchoices.any? %>
   <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
-    <ul class="answerchoices">
-      <% question.answerchoices.each do |answerchoice| %>
-        <%= render partial: "answerchoices/answerchoice", object: answerchoice %>
-      <% end %>
-    </ul>
+</div>
+
+
+<div class="col-md-8">
+  <% pie_array = [] %>
+  <% if @question.answerchoices.any? %>
+    <% puts "START debug" %>
+    <% for i in @question.answerchoices do%>
+      <% #pie_array << [i.content, i.tally] %>
+      <% puts i.inspect %>
+      <% puts i.userchoices.inspect %>
+      <% pie_array << [i.content, i.userchoices.count] %>
+    <% end %>
+    <% puts "END debug" %>
+    
+    <% puts pie_array %>
+  
+    
+     <%= pie_chart pie_array %>
   <% end %>
 </div>
