@@ -1,3 +1,12 @@
+<style>
+.actions {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+
+
 <p id="notice"><%= notice %></p>
 
 <%= puts @poll.inspect %>
@@ -11,6 +20,10 @@
   <strong>Creator:</strong>
   <%= User.find(@poll.user_id).name %>
 </p>
+
+<br>
+  <hr></hr>
+<br>
 
 <div class="col-md-8">
   <%= form_with(model: @poll, url: {action: "pvote", id: @poll.id, controller: "polls"}, local: true) do |form| %>
@@ -43,7 +56,7 @@
       </p>
       <p>
         <div class="actions">
-          <%= form.submit "✔", class: "btn btn-primary" %>
+          <%= form.submit "Submit Answer Choices", class: "btn btn-success" %>
         </div>
       </p>
     <% end %>
