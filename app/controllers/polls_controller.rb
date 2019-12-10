@@ -76,11 +76,11 @@ class PollsController < ApplicationController
       puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
       @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
       if @userchoice.save
-        redirect_to polls_path, notice: 'Thank you for voting!'
         puts "success!"
         #format.json { render :show, status: :ok, location: @poll }
       end
     end
+    redirect_to polls_path, notice: 'Thank you for voting!'
     puts "pvote END"
   end
 
