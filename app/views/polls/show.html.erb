@@ -32,7 +32,6 @@
                         <%= radio_button_tag("choices[" + question.id.to_s + "]", answerchoice.id) %>
                         <%= label_tag("choices[" + question.id.to_s + "]", answerchoice.content) %>
                         <br>
-                        Current vote count: <%= answerchoice.tally %>
                       </span>
                     </li>
                   <% end %>
