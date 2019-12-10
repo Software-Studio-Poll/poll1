@@ -1,9 +1,24 @@
 <style>
+.questiontext {
+  width: 900px
+}
+
 .actions {
     position: fixed;
     bottom: 0;
     width: 100%;
 }
+
+span.content {
+  display: inline-block;
+  width: 100%;
+}
+
+#radio label {
+	float: right;
+  display: inline
+}
+
 </style>
 
 
@@ -32,21 +47,21 @@
     </div>
     <% if @poll.questions.any? %>
     <h3><%= @poll.title %></h3>
-      <p>
+      <p class="q_containter">
         <% @poll.questions.each do |question| %>
           <div class="col-md-8">
             <% if question.answerchoices.any? %>
-            <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
+            <h3 class = "questiontext"><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
               <ul class="answerchoices">
                 <% question.answerchoices.each do |answerchoice| %>
                   <%= form.fields_for :userchoices do |userchoices_form| %>
-                    <li>
+                    <table>
                       <span class="content">
-                        <%= radio_button_tag("choices[" + question.id.to_s + "]", answerchoice.id) %>
+                        <%= radio_button_tag "choices[" + question.id.to_s + "]", answerchoice.id %>
                         <%= label_tag("choices[" + question.id.to_s + "]", answerchoice.content) %>
                         <br>
                       </span>
-                    </li>
+                    </table>
                   <% end %>
                 <% end %>
               </ul>
