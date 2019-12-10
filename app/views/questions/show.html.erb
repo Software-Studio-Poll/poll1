@@ -5,11 +5,23 @@
 
 
 <div class="col-md-8">
+  <% pie_array = [] %>
   <% if @question.answerchoices.any? %>
-     <%= pie_chart @question.answerchoices.group(:content).count %>
-     <pie-chart :data="{'Blueberry': 44, 'Strawberry': 23}"></pie-chart>
+    <% for i in @question.answerchoices do%>
+      <% pie_array << [i.content, i.tally] %>
+      <% #pie_array << [i.content, i.userchoices.size] %>
+    <% end %>
+    
+    
+    <% puts pie_array %>
+  
+     
+     
+     <%= pie_chart pie_array %>
+     
   <% end %>
 </div>
+
 
 
 
