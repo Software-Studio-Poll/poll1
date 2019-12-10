@@ -7,11 +7,14 @@
 <div class="col-md-8">
   <% pie_array = [] %>
   <% if @question.answerchoices.any? %>
+    <% puts "START debug" %>
     <% for i in @question.answerchoices do%>
-      <% pie_array << [i.content, i.tally] %>
-      <% #pie_array << [i.content, i.userchoices.size] %>
+      <% #pie_array << [i.content, i.tally] %>
+      <% puts i.inspect %>
+      <% puts i.userchoices.inspect %>
+      <% pie_array << [i.content, i.userchoices.count] %>
     <% end %>
-    
+    <% puts "END debug" %>
     
     <% puts pie_array %>
   
