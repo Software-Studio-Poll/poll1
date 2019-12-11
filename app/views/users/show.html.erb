@@ -8,3 +8,6 @@
 <%else%>
     <%= render partial: "other_polls", object: @user %>
 <%end%>
+
+<%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
+
