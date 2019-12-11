@@ -1,4 +1,4 @@
-<h1><%= @user.name %>'s Polls</h1>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,12 +13,12 @@
   <% puts @user.id %>
 
   <tbody>
-    <%= @users_polls = @user.polls %>
+    <% @users_polls = @user.polls %>
     <% @users_polls.each do |poll| %>
       <tr>
         <td><%= User.find(poll.user_id).name %></td>
         <td><%= link_to poll.title, poll %></td>
-        <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
+        <td><%= link_to 'Delete', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         
       </tr>
     <% end %>

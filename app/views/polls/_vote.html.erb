@@ -11,14 +11,16 @@
       <% @poll.questions.each do |question| %>
         <div class="col-md-8">
           <% if question.answerchoices.any? %>
-          <h3 class = "questiontext"><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
+          <h3 class = "questiontext"><%= question.text %></h3>
             <ul class="answerchoices">
               <% question.answerchoices.each do |answerchoice| %>
                 <%= form.fields_for :userchoices do |userchoices_form| %>
                   <table>
                     <span class="content">
+                    <%= label_tag do %>
                       <%= radio_button_tag "choices[" + question.id.to_s + "]", answerchoice.id %>
-                      <%= label_tag "choices[" + question.id.to_s + "]", answerchoice.content, class: "label" %>
+                      <%= answerchoice.content %>
+                    <% end %>
                     </span>
                   </table>
                 <% end %>
