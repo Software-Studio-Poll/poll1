@@ -1,13 +1,4 @@
-<p>
-  <strong>Title:</strong>
-  <%= @poll.title %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
-  <%= User.find(@poll.user_id).name %>
-</p>
-
+<h3 class = 'title'><%= @poll.title %></h3>
 
 <div class="col-md-8">
   <%@poll.questions.each do |question| %>
