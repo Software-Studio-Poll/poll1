@@ -16,9 +16,6 @@
     poll_title = fake_name + "'s Poll"
     @harry = User.create!(name: fake_name, email: fake_email, permission:0, password: fake_pw, password_confirmation: fake_pw)
     @harry_poll = Poll.create!(title: poll_title, user_id: @harry.id)
-    
-    
-    
     fake_name = Faker::Name.name
     fake_email = Faker::Internet.email
     fake_pw = Faker::University.name
@@ -28,13 +25,13 @@
         @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}\"", poll_id: @harry_poll.id)
         3.times do |o|
             chara = Faker::Movies::HarryPotter.character
-            @achoice = Answerchoice.create!(content: chara, question_id: @q.id, tally: 0)
+            @achoice = Answerchoice.create!(content: chara, question_id: @q.id)
             Userchoice.create!(answerchoice_id: @achoice.id, user_id: @harry.id)
             Userchoice.create!(answerchoice_id: @achoice.id, user_id: @hermione.id)
         
             
         end
-        Answerchoice.create!(content: "None of the above.", question_id: @q.id, tally: 0)
+        Answerchoice.create!(content: "None of the above.", question_id: @q.id)
     end
 end
 
