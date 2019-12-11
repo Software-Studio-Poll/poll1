@@ -16,7 +16,6 @@
   bottom: 0;
   right:0;
   text-align: center;
-  
 }
 
 span.content {
@@ -32,69 +31,22 @@ span.content {
 }
 
 </style>
-
-
-<p id="notice"><%= notice %></p>
-
-<%= puts @poll.inspect %>
-
-<p>
-  <strong>Title:</strong>
-  <%= @poll.title %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
-  <%= User.find(@poll.user_id).name %>
-</p>
-
-
-<%= link_to 'Edit', edit_poll_path(@poll) %> |
-<%= link_to 'Back', polls_path %>
-
-
-<br>
-  <hr></hr>
-<br>
-
-<div class="col-md-8">
-  <%= form_with(model: @poll, url: {action: "pvote", id: @poll.id, controller: "polls"}, local: true) do |form| %>
-    <div class="field">
-      <%= form.hidden_field :user_id, value: current_user.id, class: 'form-control', required: true %>
-    </div>
-    <% if @poll.questions.any? %>
-    <h3 class = 'title'><%= @poll.title %></h3>
-      <p class="q_containter">
-        <% @poll.questions.each do |question| %>
-          <div class="col-md-8">
-            <% if question.answerchoices.any? %>
-            <h3 class = "questiontext"><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
-              <ul class="answerchoices">
-                <% question.answerchoices.each do |answerchoice| %>
-                  <%= form.fields_for :userchoices do |userchoices_form| %>
-                    <table>
-                      <span class="content">
-                        <%= radio_button_tag "choices[" + question.id.to_s + "]", answerchoice.id %>
-                        <%= label_tag "choices[" + question.id.to_s + "]", answerchoice.content, class: "label" %>
-                      </span>
-                    </table>
-                  <% end %>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
-        <% end %>
-      </p>
-      <br>
-      <br><br>
-      <p>
-        <div class="actions">
-          <%= form.submit "Submit Answer Choices", class: "btn btn-success" %>
-        </div>
-      </p>
+<% user_list = [] %>
+<% for quest in @poll.questions %>
+  <% for ans in quest.answerchoices %>
+    <% for u in ans.userchoices %>
+      <% user_list << u.user_id %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+
+<% if user_list.include? current_user.id %>
+  <%= render partial: "results", object: @poll %>
+<% else %>
+  <%= render partial: "vote", object: @poll %>
+
+<% end %>
 
 
 
+<%= link_to 'Back', polls_path %>
