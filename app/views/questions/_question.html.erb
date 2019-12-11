@@ -5,9 +5,9 @@
 
 <div class="col-md-8">
   <% pie_array = [] %>
-  <% if @question.answerchoices.any? %>
+  <% if question.answerchoices.any? %>
     <% puts "START debug" %>
-    <% for i in @question.answerchoices do%>
+    <% for i in question.answerchoices do%>
       <% #pie_array << [i.content, i.tally] %>
       <% puts i.inspect %>
       <% puts i.userchoices.inspect %>

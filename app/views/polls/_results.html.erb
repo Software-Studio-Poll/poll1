@@ -1,0 +1,18 @@
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @poll.title %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= User.find(@poll.user_id).name %>
+</p>
+
+
+<div class="col-md-8">
+  <%@poll.questions.each do |question| %>
+    <%= render partial: "questions/question", object: question %>
+  <% end %>
+</div>
