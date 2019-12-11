@@ -1,0 +1,25 @@
+<h1><%= @user.name %>'s Polls</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Creator</th>
+      <th scope="col">Title</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  
+  <% puts "ID" %>
+  <% puts @user.id %>
+  <% puts @user.id %>
+
+  <tbody>
+    <%= @users_polls = @user.polls %>
+    <% @users_polls.each do |poll| %>
+      <tr>
+        <td><%= User.find(poll.user_id).name %></td>
+        <td><%= link_to poll.title, poll %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
