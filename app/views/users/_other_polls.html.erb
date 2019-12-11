@@ -13,7 +13,7 @@
   <% puts @user.id %>
 
   <tbody>
-    <%= @users_polls = @user.polls %>
+    <% @users_polls = @user.polls %>
     <% @users_polls.each do |poll| %>
       <tr>
         <td><%= User.find(poll.user_id).name %></td>
