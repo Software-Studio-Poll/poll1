@@ -28,4 +28,12 @@ body {
     padding-top: 150px; 
     
 }
+
+div {
+    font-family: "Sans-serif", Verdana, serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Sans-serif", Verdana, serif;
+}
   
