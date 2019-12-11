@@ -72,15 +72,20 @@ class PollsController < ApplicationController
     puts "pvote START"
     puts params
     puts params[:poll][:user_id]
-    params[:choices].each do |key, value| 
-      puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
-      @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
-      if @userchoice.save
-        puts "success!"
-        #format.json { render :show, status: :ok, location: @poll }
+    @poll = Poll.find(params[:id])
+    if params[:choices]
+      params[:choices].each do |key, value| 
+        puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
+        @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
+        if @userchoice.save
+          puts "success!"
+          #format.json { render :show, status: :ok, location: @poll }
+        end
       end
+      redirect_to @poll, notice: 'Thank you for voting!'
+    else
+      redirect_to @poll, notice: "You didn't select any choices!"
     end
-    redirect_to polls_path, notice: 'Thank you for voting!'
     puts "pvote END"
   end
 

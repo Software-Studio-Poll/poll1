@@ -39,7 +39,7 @@ span.content {
     <% end %>
   <% end %>
 <% end %>
-
+<p id="notice"><%= notice %></p>
 <% if user_list.include? current_user.id %>
   <%= render partial: "results", object: @poll %>
 <% else %>
