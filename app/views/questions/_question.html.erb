@@ -1,5 +1,5 @@
 <div class="col-md-8">
-  <h3><%= question.text %> (<%= question.answerchoices.count %> choices)</h3>
+  <h3><%= question.text %></h3>
 </div>
 
 
@@ -8,7 +8,6 @@
   <% if question.answerchoices.any? %>
     <% puts "START debug" %>
     <% for i in question.answerchoices do%>
-      <% #pie_array << [i.content, i.tally] %>
       <% puts i.inspect %>
       <% puts i.userchoices.inspect %>
       <% pie_array << [i.content, i.userchoices.count] %>
