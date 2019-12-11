@@ -2,8 +2,7 @@
 <%= puts @user.id %>
 <%= puts (current_user.id == @user.id) %>
 
-
+<!--
 <%= render partial: "my_polls", object: @user %>
-
-<!--<%= render partial: "other_polls", object: @user %>
 -->
+<%= render partial: "other_polls", object: @user %>
