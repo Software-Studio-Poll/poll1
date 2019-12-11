@@ -48,5 +48,9 @@ span.content {
 <% end %>
 
 
-
-<%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
+<div style = "float: right">
+  <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-head"></span>More From This User</button>'.html_safe, user_path(User.find(@poll.user_id)) %>
+</div>
+<div style = "float: right">
+  <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
+</div>
