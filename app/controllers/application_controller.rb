@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :redirect_to
   include SessionsHelper
       
     private

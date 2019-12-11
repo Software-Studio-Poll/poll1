@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
-<%= puts @user.id %>
-<%= puts (current_user.id == @user.id) %>
-
-<h1><%= @user.name %>'s Polls</h1>
-<%if @user.id == current_user.id%>
-    <%= render partial: "my_polls", object: @user %>
+<%if current_user %>
+    <h1><%= @user.name %>'s Polls</h1>
+    <%if @user.id == current_user.id%>
+        <%= render partial: "my_polls", object: @user %>
+    <%else%>
+        <%= render partial: "other_polls", object: @user %>
+    <%end%>
 <%else%>
-    <%= render partial: "other_polls", object: @user %>
+    <% puts "this" %> 
+    <% redirect_to login_url %>
 <%end%>
 
 <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
