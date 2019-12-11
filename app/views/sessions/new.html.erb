@@ -17,8 +17,8 @@
 
 <div id = "wrapper">
   <h1>Log In</h1>
-  <div class='left', style="width: 600px; float:left;">
-    <div class="row">
+  <div class='left', style="width: 600px; float:left; margin-left: 80px; margin-right: 0px; padding-right: 0px;">
+    <div class="row", style="padding-right: 0px;">
       <div class="col-md-6 col-md-offset-3">
         <%= form_for(:session, url: login_path) do |f| %>
   
@@ -39,14 +39,14 @@
     </div>
   </div>
 
-  <div id='right', style="width: 600px; float:right;">
-    <h2>
+  <div id='right', style="width: 500px; float:right; margin-right: 80px; margin-left: 0px">
+    <h2 style="font-size: 30px">
       Welcome to PollMe!
     </h2>
-    <h2>
+    <h2 style="font-size: 20px">
       Here you can create polls that your friends and peers can vote on. 
       Have you ever wanted some insight into the thoughts and feelings of your buddies? 
-      Have you ever wanted to quiz your students? This is the page for you! Welcome all.
+      Have you ever wanted to quiz your students? This is the page for you!
     </h2>
   </div>  
 </div>
