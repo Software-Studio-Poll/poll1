@@ -1,4 +1,22 @@
 
-<%= render partial: "results", object: @poll %>
+<% user_list = [] %>
+<% for quest in @poll.questions %>
+  <% for ans in quest.answerchoices %>
+    <% for u in ans.userchoices %>
+      <% user_list << u.user_id %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if user_list.include? current_user.id %>
+  <%= render partial: "results", object: @poll %>
+<% else %>
+  <%= render partial: "vote", object: @poll %>
+
+<% end %>
+
 
 <%= link_to 'Back', polls_path %>
+
+
+
