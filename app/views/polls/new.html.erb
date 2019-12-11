@@ -2,7 +2,9 @@
 
 <%= render 'form', poll: @poll %>
 
-<%= link_to 'Back', polls_path %>
+<%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, polls_path %>
+
+
 <script>
     $(document).on("click", ".rem_choice", function(){
     div = $(this).parent();

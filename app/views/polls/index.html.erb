@@ -2,7 +2,7 @@
 
 <div class="banner" style="padding:15px; text-align:center;">
   <div class="banner-content">
-    <%= link_to 'New Poll', new_poll_path, class: "btn btn-success" %>
+    <%= link_to 'New Poll', new_poll_path, class: "btn btn-success btn-lg" %>
   </div>
 </div>
 
@@ -13,9 +13,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Creator</th>
-      <th scope="col">Title</th>
-      <th colspan="2"></th>
+      <th scope="col">User Name</th>
+      <th scope="col">Poll Name</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -24,6 +24,11 @@
       <tr>
         <td><%= User.find(poll.user_id).name %></td>
         <td><%= link_to poll.title, poll %></td>
+        
+        <!--
+        <td><%= link_to 'Update Poll', edit_poll_path(poll) %></td> 
+        <td><%= link_to 'Delete Poll', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        -->
       </tr>
     <% end %>
   </tbody>
