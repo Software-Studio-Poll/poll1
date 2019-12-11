@@ -1,22 +1,35 @@
 <% provide(:title, "Log in") %>
 <h1>Log In</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+<div style="width: 600px; float:left;">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(:session, url: login_path) do |f| %>
+  
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        <br>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+        <br>
+        <%= f.submit "Log in", class: "btn btn-success" %>
+        
+      <% end %>
       
-      <%= f.submit "Log in", class: "btn btn-success" %>
-      
-    <% end %>
-    
-    <b></b>
-      
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+      <b></b>
+        
+      <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
   </div>
+</div>
+
+<div style="width: 600px; float:right;">
+  <h2>
+    Welcome to PollMe!
+  </h2>
+  <h2>
+    Here you can create polls that your friends and peers can vote on. 
+    Have you ever wanted some insight into the thoughts and feelings of your buddies? 
+    Have you ever wanted to quiz your students? This is the page for you! Welcome all.
+  </h2>
 </div>
