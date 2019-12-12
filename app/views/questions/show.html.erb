@@ -2,5 +2,31 @@
 
 <%= render partial: "question", object: @question %>
 
+
+
+<div class="col-md-8">
+  <% pie_array = [] %>
+  <% if @question.answerchoices.any? %>
+    <% puts "START debug" %>
+    <% for i in @question.answerchoices do%>
+      <% #pie_array << [i.content, i.tally] %>
+      <% puts i.inspect %>
+      <% puts i.userchoices.inspect %>
+      <% pie_array << [i.content, i.userchoices.count] %>
+    <% end %>
+    <% puts "END debug" %>
+    
+    <% puts pie_array %>
+  
+     
+     
+     <%= pie_chart pie_array %>
+     
+  <% end %>
+</div>
+
+
+
+
 <%= link_to 'Edit Question text', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>

@@ -69,8 +69,7 @@ hr {
   </div>
 
   <div class="field">
-    <%= form.label :id, "User ID" %>
-    <%= form.number_field :user_id, class: 'form-control', required: true %>
+    <%= form.hidden_field :user_id, value: current_user.id, class: 'form-control', required: true %>
   </div>
   
   <br>
@@ -102,12 +101,6 @@ hr {
 <% end %>
 
 <script>
-  function RemoveHiddenRequired() {
-    console.log($("#questions").find("[required]:hidden"));
-    console.log($("[required]:hidden"));
-    $("#questions").find("[required]:hidden").remove();
-  }
-
   $( document ).ready(function() {
     console.log( "ready!" );
     hide = $(".q").first().clone()
@@ -203,35 +196,4 @@ hr {
     //move the add_questions button to the bottom
     $("#questions").append($(this));
   });
-  
-  $(document).on("click", ".rem_choice", function(){
-    div = $(this).parent();
-    if ($(this).parent().siblings(".a:visible").length == 0) {
-      alert("You can't remove only choice!");
-    }
-    else {
-      div.children("input:hidden").attr("value", "1");
-      //div.attr("hidden","");
-      div.remove();
-    }
-    
-    //RemoveHiddenRequired();
-    
-  });
-  
-  $(document).on("click", ".rem_question", function(){
-    div = $(this).parent();
-    console.log($(this));
-    console.log(div);
-    if ($(this).parent().siblings(".q:visible").length == 0) {
-      alert("You can't remove only question!");
-    }
-    else {
-      div.remove();
-    }
-    
-    //RemoveHiddenRequired();
-    
-  });
-  
 </script>

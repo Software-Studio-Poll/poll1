@@ -1,5 +1,7 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :create, :new, :edit, :update]
+  #before_action :logged_in_user
 
   # GET /polls
   # GET /polls.json
@@ -64,6 +66,27 @@ class PollsController < ApplicationController
       format.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def pvote
+    puts "pvote START"
+    puts params
+    puts params[:poll][:user_id]
+    @poll = Poll.find(params[:id])
+    if params[:choices]
+      params[:choices].each do |key, value| 
+        puts "creating userchoice with user_id #{params[:poll][:user_id]} and answerchoice_id #{value}"
+        @userchoice = Userchoice.new({"answerchoice_id"=>value, "user_id"=>params[:poll][:user_id]})
+        if @userchoice.save
+          puts "success!"
+          #format.json { render :show, status: :ok, location: @poll }
+        end
+      end
+      redirect_to @poll, notice: 'Thank you for voting!'
+    else
+      redirect_to @poll, notice: "You didn't select any choices!"
+    end
+    puts "pvote END"
   end
 
   private

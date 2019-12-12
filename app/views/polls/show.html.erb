@@ -1,26 +1,56 @@
-<p id="notice"><%= notice %></p>
+<style>
+.links {
+  right: 0;
+}
 
-<p>
-  <strong>Title:</strong>
-  <%= @poll.title %>
-</p>
+.title{
+  font-size: 40px;
+}
 
-<p>
-  <strong>User:</strong>
-  <%= @poll.user_id %>
-</p>
+.questiontext {
+  width: 900px
+}
 
-<div class="col-md-8">
-  <% if @poll.questions.any? %>
-  <h3><%= @poll.title %></h3>
-    <p>
-      <% @poll.questions.each do |question| %>
-        <%= render partial: "questions/question", object: question %>
-      <% end %>
-    </p>
+.actions {
+  position: fixed;
+  bottom: 0;
+  right:0;
+  text-align: center;
+}
+
+span.content {
+  width: 100%;
+  
+}
+
+.label {
+  color: #333333;
+  font-size: 15px;
+  display: inline
+  padding: 10px;
+}
+
+</style>
+<% user_list = [] %>
+<% for quest in @poll.questions %>
+  <% for ans in quest.answerchoices %>
+    <% for u in ans.userchoices %>
+      <% user_list << u.user_id %>
+    <% end %>
   <% end %>
+<% end %>
+<p id="notice"><%= notice %></p>
+<% if user_list.include? current_user.id %>
+  <%= render partial: "results", object: @poll %>
+<% else %>
+  <%= render partial: "vote", object: @poll %>
+
+<% end %>
+
+
+<div style = "float: right">
+  <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-head"></span>More From This User</button>'.html_safe, user_path(User.find(@poll.user_id)) %>
 </div>
-
-
-<%= link_to 'Edit', edit_poll_path(@poll) %> |
-<%= link_to 'Back', polls_path %>
+<div style = "float: right">
+  <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
+</div>

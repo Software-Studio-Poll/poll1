@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_200416) do
+ActiveRecord::Schema.define(version: 2019_12_12_011017) do
 
   create_table "answerchoices", force: :cascade do |t|
     t.text "content"
     t.integer "question_id"
-    t.integer "tally"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -34,10 +33,16 @@ ActiveRecord::Schema.define(version: 2019_11_21_200416) do
     t.integer "poll_id"
   end
 
+  create_table "userchoices", force: :cascade do |t|
+    t.integer "answerchoice_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "permission"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"

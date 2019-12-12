@@ -1,19 +1,19 @@
+
+    
+<div style = "float: right"> 
+    <%= link_to '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-left"></span>Back</button>'.html_safe, url_for(:back) %>
+</div> 
+
 <p id="notice"><%= notice %></p>
+<%if current_user %>
+    <h1><%= @user.name %>'s Polls</h1>
+    <%if @user.id == current_user.id%>
+        <%= render partial: "my_polls", object: @user %>
+    <%else%>
+        <%= render partial: "other_polls", object: @user %>
+    <%end%>
+<%else%>
+    <% puts "this" %> 
+    <% redirect_to login_url %>
+<%end%>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Permission:</strong>
-  <%= @user.permission %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

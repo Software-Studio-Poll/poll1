@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Answerchoice:</strong>
+  <%= @userchoice.answerchoice_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @userchoice.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_userchoice_path(@userchoice) %> |
+<%= link_to 'Back', userchoices_path %>

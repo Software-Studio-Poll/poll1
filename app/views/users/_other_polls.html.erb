@@ -1,0 +1,22 @@
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  
+  <% puts "ID" %>
+  <% puts @user.id %>
+  <% puts @user.id %>
+
+  <tbody>
+    <% @users_polls = @user.polls %>
+    <% @users_polls.each do |poll| %>
+      <tr>
+        <td><%= link_to poll.title, poll %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

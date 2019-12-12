@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<style>
+  ul1{
+    display: inline-block;
+    vertical-align: middle;
+    color: #ffffff;
+    font-size: 17px;
+    position: bottom;
+  }
+  .nav li {
+    display: inline;
+  }
+  
+  .welcome{
+    position: absolute;
+    left: 0;
+  }
+</style>
 
 <html lang="en">
   <head>
@@ -9,23 +26,32 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag asset_path('test.png') %>
+    <%= favicon_link_tag asset_path('Screen.png') %>
     
     
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header class="navbar navbar-fixed-top navbar-inverse", style="background-color: rgb(53,81,92)">
       
       <div class="container">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Font_Awesome_5_solid_poll.svg" width="50" height="50"/>
         <%= link_to "PollMe", root_path, id: "logo" %>
         
         <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", root_path %></li>
+          <ul1 class="nav navbar-nav navbar-left">
             <% if logged_in? %>
-              <li><%= link_to "Log out", logout_path, method: :delete %></li>
+              <li style = "position:relative; top:23px;"><%= welcome_string = "Welcome " +  current_user.name + "!" %></li>
+            <% end %>
+          </ul1>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <% if logged_in? %>
+              <li><%=link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-user"></span> Your Polls</button>'.html_safe, user_path(current_user) %></li1>
+              <li><%= link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home"></span> Home</button>'.html_safe, root_path %></li>
+              <li><%= link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-log-out"></span> Log Out</button>'.html_safe, logout_path, method: :delete %></li>
+              
             <% else %>
-              <li><%= link_to "Log in", login_path %></li>
-              <li><%= link_to "Sign Up", "/signup" %></li>
+              <li><%= link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home"></span> Home</button>'.html_safe, root_path %></li>
+              <li><%= link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-log-in"></span> Log In</button>'.html_safe, login_path %></li>
+              <li><%= link_to '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-new-window"></span> Sign Up</button>'.html_safe, "/signup" %></li>
             <% end %>
           </ul>
         </nav>
