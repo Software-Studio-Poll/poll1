@@ -14,12 +14,12 @@
     fake_email = Faker::Internet.email
     fake_pw = Faker::University.name
     poll_title = fake_name + "'s Poll"
-    @harry = User.create!(name: fake_name, email: fake_email, permission:0, password: fake_pw, password_confirmation: fake_pw)
+    @harry = User.create!(name: fake_name, email: fake_email, password: fake_pw, password_confirmation: fake_pw)
     @harry_poll = Poll.create!(title: poll_title, user_id: @harry.id)
     fake_name = Faker::Name.name
     fake_email = Faker::Internet.email
     fake_pw = Faker::University.name
-    @hermione = User.create!(name: fake_name, email: fake_email, permission:0, password: fake_pw, password_confirmation: fake_pw)
+    @hermione = User.create!(name: fake_name, email: fake_email, password: fake_pw, password_confirmation: fake_pw)
     4.times do |n|
         quote = Faker::Movies::HarryPotter.quote
         @q = Question.create!(text: "Who from Harry Potter said this: \n \"#{quote}\"", poll_id: @harry_poll.id)
