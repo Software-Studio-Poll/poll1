@@ -6,7 +6,24 @@
 
 <p id="notice"><%= notice %></p>
 <%if current_user %>
-    <h1><%= @user.name %>'s Polls</h1>
+    <%if @user.id == current_user.id%>
+        <div class="banner" style="padding:15px; text-align:center;">
+          <div class="banner-content">
+            <%= link_to 'New Poll', new_poll_path, class: "btn btn-success btn-lg" %>
+          </div>
+        </div>
+    <%end%>
+    <%if  @user.name[-1] == 's'%>
+        <h1><%= @user.name %>' Polls</h1>
+    <%else%>
+        <h1><%= @user.name %>'s Polls</h1>
+    <%end%>
+    
+    
+    
+    
+    
+    
     <%if @user.id == current_user.id%>
         <%= render partial: "my_polls", object: @user %>
     <%else%>
