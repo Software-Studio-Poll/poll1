@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '2.6.3'
 
 
 gem "chartkick"
@@ -13,7 +13,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'bootstrap-sass', '3.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.6'
+gem 'rails', '~> 6.0.0'
 gem 'bcrypt', '~> 3.1.12'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3', '~> 1.4'
